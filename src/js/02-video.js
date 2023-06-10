@@ -10,5 +10,7 @@ function saveTime({ seconds }) {
 
 const savedTime = localStorage.getItem('videoplayer-current-time');
 player.on('timeupdate', throttle(saveTime, 1000));
-player.setCurrentTime(savedTime);
 
+if (savedTime !== null) {
+  player.setCurrentTime(savedTime);
+}
