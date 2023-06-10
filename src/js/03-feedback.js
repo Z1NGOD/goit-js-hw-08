@@ -6,6 +6,12 @@ let formData = {
     email: "",
     message: "",
 };
+
+const updateFormData = () => {
+    formData.email = formEl.email.value;
+    formData.message = formEl.message.value;
+};
+
 formEl.addEventListener("input", throttle((event) => { 
     if (event.target.name === "email") {
         formData.email = event.target.value;
@@ -20,13 +26,13 @@ const savedFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 if (savedFormData) {
     formEl.email.value = savedFormData.email;
     formEl.message.value = savedFormData.message;
+    updateFormData();
 }
 
 formEl.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!formData.email) {
         alert("Geben Sie schnell Ihre E-Mail-Adresse ein")
-
         return;
     }
     else if (!formData.message) {
@@ -37,6 +43,3 @@ formEl.addEventListener("submit", (event) => {
     console.log(formData);
     localStorage.clear();
 });
-
-
-
